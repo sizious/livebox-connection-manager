@@ -1,0 +1,129 @@
+
+                    * * * [b i g _ f u r y ] S i Z i O U S * * *
+                           http://sbibuilder.shorturl.com/
+        _____________    _____________    _____________________________________
+       /            /   /            /   /           /    /      /            /
+      /     _______/___/_______     /___/           /    /      /     _______/
+     /     /      /   /            /   /     /     /    /      /     /      /
+    /            /   /            /   /     /     /    /      /            /
+   /________/   /   /     _______/   /     /     /    /__    /_________/  /
+  /            /   /            /   /           /           /            / 
+ /____________/___/____________/___/___________/___________/____________/SiZiOUS
+
+ __                              ______________________________________________
+ __| Livebox Connection Manager |______________________________________________
+
+  Version...: 1.1
+  Date......: 24 février 2010
+ __               _____________________________________________________________
+ __| DESCRiPTiON |_____________________________________________________________
+ 
+  Ce programme a pour but de contrôler la Livebox d'Orange en ligne de commande.
+  Pour le moment, seule la Livebox d'Inventel est supportée (pour cause, c'est 
+  la mienne...). Les opérations supportées sont l'affichage du statut de 
+  connexion, ainsi que les opérations de connexion/déconnexion d'Internet.
+  
+  Je ne sais pas si je supporterais d'autres Livebox à part celle d'Inventel.
+  A vrai dire j'ai fait ce programme pour moi. C'est simplement un raccourci
+  pour ceux qui n'ont pas de temps à perdre à passer via la (lourde) interface
+  de la Livebox.
+  
+  L'idée était de faire des opérations de maintenance de façon automatisée via
+  des tâches planifiées, mais également de reconnecter la Livebox si celle-ci
+  n'était plus connectée à Internet. C'est intéressant surtout quand je suis en 
+  déplacement loin de la Livebox.
+ __               _____________________________________________________________
+ __| UTiLiSATiON |_____________________________________________________________
+
+  Ce programme s'utilise en ligne de commande. Pour l'utiliser, ouvrez un
+  invite de commande.
+    
+  Les différentes commandes sont les suivantes:
+  
+  Afficher l'aide:
+   lboxmgr /?
+   
+  La partie intéressante:
+   lboxmgr <ip> <usr> <pwd> [/info | /connect | /disconnect | /renew] [/u]
+   
+  Pour chaque opération spécifiée à droite (info, connect...) vous devez entrer
+  les informations de connexion à la Livebox. Typiquement ceci :
+  
+   lboxmgr 192.168.1.1 admin admin
+
+  Ensuite vous pouvez faire exécuter à la Livebox la commande souhaitée:
+
+   lboxmgr 192.168.1.1 admin admin /info
+
+  Dans le cas de la Livebox d'Inventel, vous pouvez remplacer l'adresse IP par
+  la valeur "configuration.adsl". Ceci est utile si vous changez souvent l'IP
+  de la Livebox. Exemple:
+
+   lboxmgr configuration.adsl admin admin /info
+
+  Les commandes disponibles sont:
+   /info       : Affiche le statut de la Livebox.
+   /connect    : Lance une demande de connexion (un click sur "Connecter")
+   /disconnect : Lance une demande de déconnexion (un click sur "Déconnecter")
+   /renew      : Renouvelle l'adresse IP de votre Livebox (non dégroupés 
+                 seulement, ça ne fera rien si vous avez une IP fixe à part 
+                 vous déconnecter et vous re-connecter).
+				 
+  Dans le cas la commande /connect et /renew, vous pouvez, si vous utilisez un
+  DNS Dynamique (comme DynDNS ou No-IP) le mettre à jour tout de suite après 
+  avoir changé d'IP. Pour cela, rajoutez le switch /u à la ligne de commande:
+   
+   lboxmgr configuration.adsl admin admin /renew /u
+  
+  L'utilisation de l'option /u n'aura aucun effet avec les autres commandes.
+  
+  Simple et efficace.
+  
+  Notez que les informations de connexion ne sont pas stockées, ainsi, vous
+  devrez les re-entrer à chaque ordre à donner à la Livebox. De plus, pour
+  des raisons de simplicité elles ne sont pas encryptées non plus. On verra ça
+  plus tard si c'est vraiment nécessaire (ça risque d'être plus compliqué...).
+
+  J'ai inclu dans l'archive de cette release un nouvel outil, appelé Connection
+  Checker. Cet outil permet de savoir si vous êtes connecté à Internet ou non.
+  Il a été fait à l'origine pour être utilisé dans un batch, afin de 
+  reconnecter la Livebox si nécessaire.
+
+  Pour l'utiliser, c'est simple, entrez simplement:
+   
+   checkcon
+
+  La console affichera le résultat. Si vous souhaitez, vous pouvez spécifier
+  deux paramètres: le premier est l'hôte à tester (par défaut, google.fr) et
+  le deuxième, le nombre de pings à effectuer. Exemple:
+   
+   checkcon www.phidels.com 10
+  
+  Cette commande va pinger phidels.com 10 fois de suite. Si une seule erreur
+  intervient, le programme indiquera "non connecté". C'est un fonctionnement
+  voulu.
+
+  Pour utiliser ce programme dans un batch, testez la sortie avec %ERRORLEVEL%.
+  Si "%ERRORLEVEL%"=="0" alors vous êtes connecté. Si "%ERRORLEVEL%"=="1", 
+  alors il y'a eu un problème lors du Ping.
+
+ __                 ___________________________________________________________
+ __| iNFO SOFTWARE |___________________________________________________________
+
+  Ce programme utilise simplement un client HTTP simple embarqué et fait des
+  requête directement sur les scripts CGI de la Livebox. Pour la partie
+  récupération des infos, une simple analyse de texte renvoyé par la Livebox
+  est faite.
+  
+  Pour les curieux, le programme a été écrit grâce à Delphi 2007.
+ __           _________________________________________________________________
+ __| CONTACT |_________________________________________________________________
+ 
+  Si vous souhaitez me contacter, rendez-vous sur mon site Internet.
+                     http://sbibuilder.shorturl.com/
+ __           _________________________________________________________________
+ __| CREDiTS |_________________________________________________________________
+ 
+  Code principal......: [big_fury]SiZiOUS
+  Tests...............: Personne à part moi... et vous.
+ _____________________________________________________________________[ FIN ]___

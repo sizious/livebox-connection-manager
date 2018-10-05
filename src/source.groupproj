@@ -1,0 +1,44 @@
+﻿<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectGuid>{260be8b0-dda1-41b0-8adf-05f0bc874b61}</ProjectGuid>
+  </PropertyGroup>
+  <ItemGroup />
+  <ItemGroup>
+    <Projects Include="checkcon\src\checkcon.dproj" />
+    <Projects Include="lboxmgr\src\lboxmgr.dproj" />
+  </ItemGroup>
+  <ProjectExtensions>
+    <Borland.Personality>Default.Personality</Borland.Personality>
+    <Borland.ProjectType />
+    <BorlandProject>
+  <BorlandProject xmlns=""> <Default.Personality> </Default.Personality> </BorlandProject></BorlandProject>
+  </ProjectExtensions>
+  <Target Name="checkcon">
+    <MSBuild Projects="checkcon\src\checkcon.dproj" Targets="" />
+  </Target>
+  <Target Name="checkcon:Clean">
+    <MSBuild Projects="checkcon\src\checkcon.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="checkcon:Make">
+    <MSBuild Projects="checkcon\src\checkcon.dproj" Targets="Make" />
+  </Target>
+  <Target Name="lboxmgr">
+    <MSBuild Projects="lboxmgr\src\lboxmgr.dproj" Targets="" />
+  </Target>
+  <Target Name="lboxmgr:Clean">
+    <MSBuild Projects="lboxmgr\src\lboxmgr.dproj" Targets="Clean" />
+  </Target>
+  <Target Name="lboxmgr:Make">
+    <MSBuild Projects="lboxmgr\src\lboxmgr.dproj" Targets="Make" />
+  </Target>
+  <Target Name="Build">
+    <CallTarget Targets="checkcon;lboxmgr" />
+  </Target>
+  <Target Name="Clean">
+    <CallTarget Targets="checkcon:Clean;lboxmgr:Clean" />
+  </Target>
+  <Target Name="Make">
+    <CallTarget Targets="checkcon:Make;lboxmgr:Make" />
+  </Target>
+  <Import Condition="Exists('$(MSBuildBinPath)\Borland.Group.Targets')" Project="$(MSBuildBinPath)\Borland.Group.Targets" />
+</Project>
